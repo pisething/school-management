@@ -1,13 +1,13 @@
-package com.ibiztechno.homework4;
+package com.ibiztechno.school;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Homework4Application {
+public class SchoolApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Homework4Application.class, args);
+		SpringApplication.run(SchoolApplication.class, args);
 	}
 
 }
