@@ -3,7 +3,7 @@ package com.ibiztechno.school.dto;
 import lombok.Data;
 
 @Data
-public class StudentRequest {
+public class StudentResponse {
 	private String name;
 	private String gender;
 	private Integer grade;
