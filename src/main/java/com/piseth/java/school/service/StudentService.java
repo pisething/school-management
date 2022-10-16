@@ -1,6 +1,8 @@
 package com.piseth.java.school.service;
 
 import java.util.List;
+
+import com.piseth.java.school.dto.StudentDto;
 import com.piseth.java.school.model.Student;
 
 public interface StudentService {
@@ -10,7 +12,7 @@ public interface StudentService {
 	//2. Search Id by Id
 	Student searchById(int id);
 	//3. Update Student by Id
-	void updateByID(int id,Student student);
+	Student updateByID(int id,StudentDto studentDto);
 	//4. Delete Student By Id
 	void deleteById(int id);
 	//5. Show all students

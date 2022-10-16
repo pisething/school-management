@@ -6,18 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
-
+import com.piseth.java.school.dto.StudentDto;
+import com.piseth.java.school.mapper.StudentMapper;
 import com.piseth.java.school.model.Student;
 import com.piseth.java.school.repository.StudentRepository;
 import com.piseth.java.school.service.StudentService;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
 public class StudentServiceImp implements StudentService {
 	@Autowired
 	private StudentRepository repository;
-
+	private StudentMapper mapper= new StudentMapper();
 
 	@Override
 	public void saveStudent(Student student) {
@@ -35,8 +34,13 @@ public class StudentServiceImp implements StudentService {
 	}
 
 	@Override
-	public void updateByID(int id,Student student) {
-		log.info("Update Succes !");
+	public Student updateByID(int id,StudentDto dto) {
+		Student student=searchById(id);
+		student.setName(dto.getName());
+		student.setSubjects(dto.getSubjects());
+		student.setAClass(dto.getAClass());
+		repository.save(student);
+		return student;
 	}
 
 	@Override

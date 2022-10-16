@@ -16,6 +16,7 @@ public class ClassMapper {
 		public AClass toClass(ClassDto classDto) {
 			   AClass aclass =new AClass();
 			   aclass.setName(classDto.getName());
+			   aclass.setGrade(classDto.getGrade());
 			   return aclass;
 		}
 }

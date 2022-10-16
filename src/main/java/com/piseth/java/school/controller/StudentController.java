@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,10 +36,10 @@ public class StudentController {
 		return ResponseEntity.ok(service.searchById(id));
 	}
 	//3.Update student()
-	@RequestMapping("/update")
-	public void updateById(@RequestParam int id,@RequestBody StudentDto studentDto) {
-		Student  student = mapper.toStudent(studentDto);
-		service.updateByID(id, student);
+	@PutMapping(path ="/update")
+	public ResponseEntity<Student> updateById(@RequestParam int id,@RequestBody StudentDto studentDto) {
+		Student stu=service.updateByID(id, studentDto);
+		return ResponseEntity.ok(stu);
 	}
 	
      @GetMapping
