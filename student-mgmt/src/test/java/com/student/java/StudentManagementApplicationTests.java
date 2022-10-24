@@ -1,10 +1,10 @@
-package com.sophak.studentmgmt;
+package com.student.java;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class StudentMgmtApplicationTests {
+class StudentManagementApplicationTests {
 
 	@Test
 	void contextLoads() {
