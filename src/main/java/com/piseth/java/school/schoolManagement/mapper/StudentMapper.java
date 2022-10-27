@@ -5,6 +5,7 @@ import org.mapstruct.factory.Mappers;
 
 import com.piseth.java.school.schoolManagement.dto.StudentDTO;
 import com.piseth.java.school.schoolManagement.model.Student;
+import com.piseth.java.school.schoolManagement.model.Subject;
 
 @Mapper
 public interface StudentMapper {
@@ -12,6 +13,6 @@ public interface StudentMapper {
 	
 	Student toEntity(StudentDTO dto);
 	
-	StudentDTO toDTO(Student entity);
+	StudentDTO toDTO(Student student);
 
 }
