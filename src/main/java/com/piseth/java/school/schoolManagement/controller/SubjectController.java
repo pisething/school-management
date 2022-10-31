@@ -53,13 +53,12 @@ public class SubjectController {
 	  subjectService.deleteById(id);
 	  return ResponseEntity.noContent().build();
   }
-  @GetMapping("/all/subject")
+  @GetMapping("/all")
    public ResponseEntity<?>getAllSubject(@RequestParam Map<String,String> params){
 	   List<SubjectDTO> list=subjectService.getAllSubject(params)
 			   .stream().map(sb->SubjectMapper.INSTANCE.toDTO(sb))
 			   .toList();
 			  
-			   
 	   return ResponseEntity.ok(list);
    }
  
