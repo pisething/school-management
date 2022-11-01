@@ -1,5 +1,6 @@
 package com.piseth.java.school.schoolManagement.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
@@ -29,6 +30,9 @@ public class Student {
 	
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "dob")
+	private LocalDate dateOfBirth;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "gender")
