@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/school_mgr
+    username: schoolmgr
+    password: 123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
