@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.piseth.java.school.schoolManagement.enums.Gender;
 
@@ -35,6 +36,8 @@ public class Student {
 	private Gender gender;
 	
 	@ElementCollection
-	@CollectionTable(name = "monthly_scores", joinColumns = @JoinColumn(name ="student_id"))
+	@CollectionTable(name = "monthly_scores", 
+		joinColumns = @JoinColumn(name ="student_id"), 
+		uniqueConstraints = @UniqueConstraint(columnNames = {"subject_id", "year", "month"}))
 	private List<MonthlyScore> monthlyScores;
 }

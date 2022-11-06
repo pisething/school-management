@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.piseth.java.school.schoolManagement.dto.MonthlyScoreDTO;
 import com.piseth.java.school.schoolManagement.dto.StudentDTO;
+import com.piseth.java.school.schoolManagement.mapper.MonthlyScoreMapper;
 import com.piseth.java.school.schoolManagement.mapper.StudentMapper;
+import com.piseth.java.school.schoolManagement.model.MonthlyScore;
 import com.piseth.java.school.schoolManagement.model.Student;
 import com.piseth.java.school.schoolManagement.service.StudentService;
 
@@ -27,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StudentController {
 	private final StudentService studentService;
+	private final MonthlyScoreMapper monthlyScoreMapper;
 
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody StudentDTO studentDTO) {
@@ -62,5 +66,12 @@ public class StudentController {
 			.map(st -> StudentMapper.INSTANCE.toDTO(st))
 			.toList();
 		return ResponseEntity.ok(list);
+	}
+	
+	@PutMapping("{id}/monthlyScore")
+	public ResponseEntity<?> addMonthlyScore(@PathVariable("id") Long id, @RequestBody MonthlyScoreDTO monthlyScoreDTO) {
+		MonthlyScore monthlyScore = monthlyScoreMapper.toMonthlyScore(monthlyScoreDTO);
+		studentService.addMonthlyScore(id, monthlyScore);
+		return ResponseEntity.ok().build();
 	}
 }

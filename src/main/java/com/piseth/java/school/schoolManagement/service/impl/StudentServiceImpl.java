@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.piseth.java.school.schoolManagement.enums.Gender;
 import com.piseth.java.school.schoolManagement.exception.ResourceNotFoundException;
+import com.piseth.java.school.schoolManagement.model.MonthlyScore;
 import com.piseth.java.school.schoolManagement.model.Student;
 import com.piseth.java.school.schoolManagement.property.StudentPropertyFilter;
 import com.piseth.java.school.schoolManagement.repository.StudentRepository;
@@ -65,6 +66,13 @@ public class StudentServiceImpl implements StudentService {
 		}
 		StudentSpec studentSpec = new StudentSpec(studentFilter);
 		return studentRepository.findAll(studentSpec);
+	}
+
+	@Override
+	public void addMonthlyScore(Long studentId, MonthlyScore monthlyScore) {
+		Student student = getById(studentId);
+		student.getMonthlyScores().add(monthlyScore);
+		studentRepository.save(student);
 	}
 
 }
