@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 import com.piseth.java.school.schoolManagement.dto.StudentDTO;
+import com.piseth.java.school.schoolManagement.model.MonthlyScore;
 import com.piseth.java.school.schoolManagement.model.Student;
 import com.piseth.java.school.schoolManagement.model.Subject;
 
@@ -14,5 +15,7 @@ public interface StudentMapper {
 	Student toEntity(StudentDTO dto);
 	
 	StudentDTO toDTO(Student student);
+
+	//MonthlyScore toEntity(MonthlyScore score, Integer id, Integer id1);
 
 }
