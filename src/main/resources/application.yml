@@ -1,11 +1,11 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/school_mgt
-    username: piseth
-    password: piseth123
+    url: jdbc:postgresql://localhost:5432/school-management
+    username: postgres
+    password: postgres
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
         hibernate:
           dialect: org.hibernate.dialect.PostgreSQLDialect

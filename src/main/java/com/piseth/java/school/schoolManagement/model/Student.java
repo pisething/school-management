@@ -37,7 +37,8 @@ public class Student {
 	
 	@ElementCollection
 	@CollectionTable(name = "monthly_scores", 
-		joinColumns = @JoinColumn(name ="student_id"), 
-		uniqueConstraints = @UniqueConstraint(columnNames = {"subject_id", "year", "month"}))
+		joinColumns = @JoinColumn(name ="student_id") ,
+		uniqueConstraints = @UniqueConstraint(columnNames = {"subject_id", "year", "month"})
+	)
 	private List<MonthlyScore> monthlyScores;
 }

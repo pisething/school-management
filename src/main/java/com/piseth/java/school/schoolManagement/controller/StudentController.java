@@ -74,4 +74,13 @@ public class StudentController {
 		studentService.addMonthlyScore(id, monthlyScore);
 		return ResponseEntity.ok().build();
 	}
+	
+	@GetMapping("/range/month/{month}")
+	public ResponseEntity<?> listRange(@PathVariable(name = "month") Short month){
+		List<Student> listRange = studentService.listRange(month);
+		return ResponseEntity.ok(listRange);
+		
+	}
+	
+	
 }
