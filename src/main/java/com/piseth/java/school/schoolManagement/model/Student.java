@@ -15,6 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.piseth.java.school.schoolManagement.enums.Gender;
 
 import lombok.Data;
@@ -37,7 +42,7 @@ public class Student {
 	
 	@ElementCollection
 	@CollectionTable(name = "monthly_scores", 
-		joinColumns = @JoinColumn(name ="student_id"), 
+		joinColumns = @JoinColumn(name ="student_id") ,
 		uniqueConstraints = @UniqueConstraint(columnNames = {"subject_id", "year", "month"}))
 	private List<MonthlyScore> monthlyScores;
 }

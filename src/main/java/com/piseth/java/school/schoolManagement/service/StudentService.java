@@ -18,4 +18,6 @@ public interface StudentService {
 	List<Student> getStudents(Map<String, String> params);
 	
 	void addMonthlyScore(Long studentId, MonthlyScore monthlyScore);
+	
+	List<Student> listStudentRank(Short month);
 }

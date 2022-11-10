@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.piseth.java.school.schoolManagement.enums.Gender;
+import com.piseth.java.school.schoolManagement.exception.ApiException;
 import com.piseth.java.school.schoolManagement.exception.ResourceNotFoundException;
 import com.piseth.java.school.schoolManagement.model.MonthlyScore;
 import com.piseth.java.school.schoolManagement.model.Student;
@@ -73,6 +74,26 @@ public class StudentServiceImpl implements StudentService {
 		Student student = getById(studentId);
 		student.getMonthlyScores().add(monthlyScore);
 		studentRepository.save(student);
+	}
+	@Override
+	public List<Student> listStudentRank(Short month) {
+		List<Student> all = studentRepository.findAll();
+		if(month<1||month>12) {
+			throw new  ApiException();
+		} 
+		return all.stream()
+					.filter(s->s.getMonthlyScores()
+							.stream()
+							.filter(s2->month==s2.getMonth())
+							.findAny().orElse(null)!=null)
+							.sorted((s1,s2)->
+								(totalScore(s1)>totalScore(s2))?1:-1).toList();
+
+	}
+	private Double totalScore(Student stu) {
+		return stu.getMonthlyScores().stream()
+				  .map(sc1->sc1.getScore())
+				  .mapToDouble(d1->d1).sum();
 	}
 
 }

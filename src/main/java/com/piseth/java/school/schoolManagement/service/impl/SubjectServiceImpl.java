@@ -27,14 +27,14 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public Subject update(Long id, Subject subject) {
-		// TODO Auto-generated method stub
-		return null;
+		getById(id);
+		return subjectRepository.save(subject);
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+		Subject student = getById(id);
+		subjectRepository.delete(student);
 	}
 
 }
