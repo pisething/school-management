@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/school_mgt
+    username: piseth
+    password: piseth123
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
