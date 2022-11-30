@@ -68,7 +68,7 @@ public class StudentController {
 		return ResponseEntity.ok(list);
 	}
 	
-	@PutMapping("{id}/monthlyScore")
+	@PutMapping("/{id}/monthlyScore")
 	public ResponseEntity<?> addMonthlyScore(@PathVariable("id") Long id, @RequestBody MonthlyScoreDTO monthlyScoreDTO) {
 		MonthlyScore monthlyScore = monthlyScoreMapper.toMonthlyScore(monthlyScoreDTO);
 		studentService.addMonthlyScore(id, monthlyScore);
