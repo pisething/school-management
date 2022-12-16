@@ -11,9 +11,13 @@ import javax.persistence.Table;
 
 import com.piseth.java.school.schoolManagement.enums.Gender;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "students")
 public class Student {
@@ -30,7 +34,7 @@ public class Student {
 	private Gender gender;
 	
 	@Column(name = "grade")
-	private Short grade;
+	private Integer grade;
 	
 	@Column(name = "class_name")
 	private String className;
