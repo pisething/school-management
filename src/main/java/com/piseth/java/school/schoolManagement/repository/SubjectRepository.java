@@ -1,4 +1,4 @@
-package com.piseth.java.school.schoolManagement.property;
+package com.piseth.java.school.schoolManagement.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

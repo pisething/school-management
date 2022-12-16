@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.piseth.java.school.schoolManagement.exception.ResourceNotFoundException;
 import com.piseth.java.school.schoolManagement.model.Subject;
-import com.piseth.java.school.schoolManagement.property.SubjectRepository;
+import com.piseth.java.school.schoolManagement.repository.SubjectRepository;
 import com.piseth.java.school.schoolManagement.service.SubjectService;
 
 import lombok.RequiredArgsConstructor;
