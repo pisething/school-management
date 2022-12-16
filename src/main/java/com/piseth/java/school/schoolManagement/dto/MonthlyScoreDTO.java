@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class MonthlyScoreDTO {
+	private Long id;
+	private Long studentId;
 	private Long subjectId;
 	private Double score;
 	private Short year;
