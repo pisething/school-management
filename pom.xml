@@ -54,7 +54,13 @@
 			<artifactId>lombok-mapstruct-binding</artifactId>
 			<version>${org.mapstruct-lombok.version}</version>
 		</dependency>
-
+               <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-collections4</artifactId>
+			    <version>4.1</version>
+			</dependency>
+               
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
