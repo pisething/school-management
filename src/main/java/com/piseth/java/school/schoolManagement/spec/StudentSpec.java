@@ -35,6 +35,7 @@ public class StudentSpec implements Specification<Student> {
 			Predicate gender = student.get("gender").in(studentFilter.getGender());
 			predicates.add(gender);
 		}
+		predicates.stream().forEach(s->System.out.println(s.getAlias()+"\t"+s.isCompoundSelection()));
 		return cb.and(predicates.toArray(Predicate[]::new));
 	}
 

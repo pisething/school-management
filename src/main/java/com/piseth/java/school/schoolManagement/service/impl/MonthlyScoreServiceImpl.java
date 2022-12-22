@@ -1,30 +1,29 @@
 package com.piseth.java.school.schoolManagement.service.impl;
 
-import java.util.Collections;
+import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.CLASS_NAME;
+import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.GRADE;
+import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.MONTH;
+import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.YEAR;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.NumberUtils;
 
-import com.piseth.java.school.schoolManagement.dto.MonthlyScoreDTO;
 import com.piseth.java.school.schoolManagement.dto.RankDTO;
-import com.piseth.java.school.schoolManagement.mapper.MonthlyScoreMapper;
 import com.piseth.java.school.schoolManagement.model.MonthlyScore;
 import com.piseth.java.school.schoolManagement.model.Student;
+import com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter;
 import com.piseth.java.school.schoolManagement.repository.MonthlyScoreRepository;
 import com.piseth.java.school.schoolManagement.repository.StudentRepository;
 import com.piseth.java.school.schoolManagement.service.MonthlyScoreService;
 import com.piseth.java.school.schoolManagement.spec.MonthlyScoreFilter;
 import com.piseth.java.school.schoolManagement.spec.MonthlyScoreSpec;
-
-import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.*;
 
 import lombok.RequiredArgsConstructor;
 
@@ -114,6 +113,30 @@ public class MonthlyScoreServiceImpl implements MonthlyScoreService{
 		rankDTO.setAverageScore(average);
 		
 		return rankDTO;
+	}
+
+	@Override
+	public Map<String,Double> getListScoreByStudentIDYearMonth(Map<String, String> params) {
+			MonthlyScoreFilter monthlyScoreFilter = new  MonthlyScoreFilter();
+			
+			if(params.containsKey(MonthlyScorePropertyFilter.STUDENTID)) {
+				monthlyScoreFilter.setAStudentId(params.get(MonthlyScorePropertyFilter.STUDENTID).isBlank() ? 0 : Long.parseLong(params.get("studentId")));
+			}
+			if(params.containsKey(YEAR)) {
+				monthlyScoreFilter.setYear(params.get(YEAR).isBlank() ? 0 : Short.parseShort(params.get(YEAR)));
+			}
+			if(params.containsKey(MONTH)) {
+				monthlyScoreFilter.setMonth(params.get(MONTH).isBlank() ? 0 : Short.parseShort(params.get(MONTH)));
+			}
+			
+			MonthlyScoreSpec monthlyScoreSpec = new MonthlyScoreSpec(monthlyScoreFilter);
+			return toListSubjectScore(monthlyScoreRepository.findAll(monthlyScoreSpec));
+	}
+	
+	private Map<String,Double> toListSubjectScore(List<MonthlyScore> monthlyScores) {
+			Map<String,Double> listSubjectscore = new HashMap<>();
+			monthlyScores.forEach(l->listSubjectscore.put(l.getSubject().getName(),l.getScore()));
+			return listSubjectscore;
 	}
 
 }

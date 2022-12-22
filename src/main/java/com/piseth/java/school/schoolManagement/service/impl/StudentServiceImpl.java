@@ -62,6 +62,7 @@ public class StudentServiceImpl implements StudentService {
 				studentFilter.setGender(gender);
 			}
 		}
+		
 		StudentSpec studentSpec = new StudentSpec(studentFilter);
 		return studentRepository.findAll(studentSpec);
 	}
