@@ -7,9 +7,12 @@ import com.piseth.java.school.schoolManagement.dto.RankDTO;
 import com.piseth.java.school.schoolManagement.model.MonthlyScore;
 
 public interface MonthlyScoreService {
+	
 	void addMonthlyScore(MonthlyScore monthlyScore);
 	
 	List<MonthlyScore> getMonthlyScore(Map<String, String> params);
 	
 	List<RankDTO> getRankDTO(Map<String, String> params);
+	
+	Map<String,Double> getListScoreByStudentIDYearMonth(Map<String, String> params);
 }
