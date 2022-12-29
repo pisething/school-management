@@ -13,5 +13,5 @@ public interface MonthlyScoreService {
 	
 	List<RankDTO> getRankDTO(Map<String, String> params);
 	
-	Map<String,Double> listScore(Map<String, String> params);
+	Map<String,Double> listScores(Map<String, String> params);
 }

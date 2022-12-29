@@ -107,7 +107,7 @@ public class MonthlyScoreServiceImpl implements MonthlyScoreService {
 	}
 
 	@Override
-	public Map<String, Double> listScore(Map<String, String> params) {
+	public Map<String, Double> listScores(Map<String, String> params) {
 		MonthlyScoreFilter monthlyScoreFilter = new MonthlyScoreFilter();
 		
 		if (params.containsKey(STUDENTID)) {

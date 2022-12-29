@@ -45,7 +45,7 @@ public class MonthlyScoreController {
 	}
 	@GetMapping("/listScore")
 	public ResponseEntity<?> getListScoreByStudentIDYearMonth(@RequestParam Map<String, String> params) {
-		Map<String,Double> listScores = monthlyScoreService.listScore(params);
+		Map<String,Double> listScores = monthlyScoreService.listScores(params);
 		return ResponseEntity.ok(listScores);
 	}
 }
