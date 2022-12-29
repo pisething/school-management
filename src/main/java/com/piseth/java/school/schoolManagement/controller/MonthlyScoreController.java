@@ -43,4 +43,9 @@ public class MonthlyScoreController {
 		List<RankDTO> ranks = monthlyScoreService.getRankDTO(params);
 		return ResponseEntity.ok(ranks);
 	}
+	@GetMapping("/listScore")
+	public ResponseEntity<?> getListScoreByStudentIDYearMonth(@RequestParam Map<String, String> params) {
+		Map<String,Double> listScores = monthlyScoreService.listScores(params);
+		return ResponseEntity.ok(listScores);
+	}
 }
