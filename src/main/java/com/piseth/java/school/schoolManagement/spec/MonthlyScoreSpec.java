@@ -49,11 +49,6 @@ public class MonthlyScoreSpec implements Specification<MonthlyScore>{
 			predicates.add(subjectIds);
 		}
 		
-		if(filter.getStudentId()!=null ) {
-			Predicate studentId = student.get("id").in(filter.getStudentId());
-			predicates.add(studentId);
-		}
-		
 		if(filter.getYear() != null) {
 			Predicate year = monthlyScore.get("year").in(filter.getYear());
 			predicates.add(year);

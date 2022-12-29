@@ -15,7 +15,6 @@ import org.springframework.util.NumberUtils;
 
 import com.piseth.java.school.schoolManagement.dto.MonthlyScoreDTO;
 import com.piseth.java.school.schoolManagement.dto.RankDTO;
-import com.piseth.java.school.schoolManagement.exception.BadRequestException;
 import com.piseth.java.school.schoolManagement.mapper.MonthlyScoreMapper;
 import com.piseth.java.school.schoolManagement.model.MonthlyScore;
 import com.piseth.java.school.schoolManagement.model.Student;
@@ -115,37 +114,6 @@ public class MonthlyScoreServiceImpl implements MonthlyScoreService{
 		rankDTO.setAverageScore(average);
 		
 		return rankDTO;
-	}
-	
-	@Override
-	public Map<String, Double> listScores(Map<String, String> params) {
-		MonthlyScoreFilter monthlyScoreFilter = new MonthlyScoreFilter();
-
-		if (params.containsKey(STUDENTID)) {
-			validationFieldBlank(params,STUDENTID);
-			monthlyScoreFilter.setStudentId(Long.parseLong(params.get(STUDENTID)));
-		}
-		if (params.containsKey(YEAR)) {
-			validationFieldBlank(params,YEAR);
-			monthlyScoreFilter.setYear(Short.parseShort(params.get(YEAR)));
-		}
-		if (params.containsKey(MONTH)) {
-			validationFieldBlank(params,MONTH);
-			monthlyScoreFilter.setMonth(Short.parseShort(params.get(MONTH)));
-		}
-
-		MonthlyScoreSpec monthlyScoreSpec = new MonthlyScoreSpec(monthlyScoreFilter);
-		return toMapScores(monthlyScoreRepository.findAll(monthlyScoreSpec));
-	}
-	// Validate Blank Field
-    private void validationFieldBlank( Map<String, String> params, String field) {
-		if(params.get(field).isBlank()) {
-			throw new BadRequestException(field.toUpperCase());
-		}
-    }
-    // Convert List to Map 
-	private Map<String, Double> toMapScores(List<MonthlyScore> monthlyScores) {
-		return monthlyScores.stream().collect(Collectors.toMap(l->l.getSubject().getName(), MonthlyScore::getScore));
 	}
 
 }
