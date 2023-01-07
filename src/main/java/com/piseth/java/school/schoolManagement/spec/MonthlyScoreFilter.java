@@ -8,6 +8,7 @@ import lombok.Data;
 public class MonthlyScoreFilter {
 	private List<Long> studentIds;
 	private List<Long> subjectIds;
+	private Long  studentId;
 	private Short year;
 	private Short month;
 	private Short grade;
