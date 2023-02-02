@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003_insert_subjects
+      author: nhoem@gmail.com
+      changes:
+        - loadData:
+            file: db/data/003/subjects.csv
+            tableName: subjects
+            columns:
+              - column:
+                  name: id
+                  type: NUMERIC
+              - column:
+                  name: name
+                  type: STRING

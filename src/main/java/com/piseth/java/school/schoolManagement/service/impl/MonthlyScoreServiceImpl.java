@@ -1,21 +1,20 @@
 package com.piseth.java.school.schoolManagement.service.impl;
 
-import java.util.Collections;
+import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.CLASS_NAME;
+import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.GRADE;
+import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.MONTH;
+import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.YEAR;
+
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.NumberUtils;
 
-import com.piseth.java.school.schoolManagement.dto.MonthlyScoreDTO;
 import com.piseth.java.school.schoolManagement.dto.RankDTO;
-import com.piseth.java.school.schoolManagement.mapper.MonthlyScoreMapper;
 import com.piseth.java.school.schoolManagement.model.MonthlyScore;
 import com.piseth.java.school.schoolManagement.model.Student;
 import com.piseth.java.school.schoolManagement.repository.MonthlyScoreRepository;
@@ -23,8 +22,6 @@ import com.piseth.java.school.schoolManagement.repository.StudentRepository;
 import com.piseth.java.school.schoolManagement.service.MonthlyScoreService;
 import com.piseth.java.school.schoolManagement.spec.MonthlyScoreFilter;
 import com.piseth.java.school.schoolManagement.spec.MonthlyScoreSpec;
-
-import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.*;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,7 +43,7 @@ public class MonthlyScoreServiceImpl implements MonthlyScoreService{
 		if(params.containsKey(GRADE)) {
 			filter.setGrade(NumberUtils.parseNumber(params.get(GRADE), Short.class));
 		}
-		if(params.containsKey(CLASS_NAME)) {
+		if(params.containsKey(CLASS_NAME)){
 			filter.setClassName(params.get(CLASS_NAME));
 		}
 		if(params.containsKey(YEAR)) {
@@ -55,6 +52,7 @@ public class MonthlyScoreServiceImpl implements MonthlyScoreService{
 		if(params.containsKey(MONTH)) {
 			filter.setMonth(NumberUtils.parseNumber(params.get(MONTH), Short.class));
 		}
+		
 		MonthlyScoreSpec spec = new MonthlyScoreSpec(filter);
 		
 		return monthlyScoreRepository.findAll(spec);
@@ -64,6 +62,7 @@ public class MonthlyScoreServiceImpl implements MonthlyScoreService{
 	public List<RankDTO> getRankDTO(Map<String, String> params) {
 			
 			Map<Student, List<MonthlyScore>> mapMonthlyScore = getMonthlyScore(params)
+					//List<MonthlyScore> monthlyScore = getMonthlyScore(params);
 				.stream()
 				.collect(Collectors.groupingBy(MonthlyScore::getStudent));
 			
@@ -86,6 +85,7 @@ public class MonthlyScoreServiceImpl implements MonthlyScoreService{
 				})
 				.sorted((a,b) -> b.getTotalScore().compareTo(a.getTotalScore()))
 				.toList();
+			//list.sort((q ,m)->q.getTotalScore().compareTo(m.getTotalScore());
 			
 			List<RankDTO> ranklist = IntStream.range(0, list.size())
 				.mapToObj(index -> {
@@ -115,5 +115,4 @@ public class MonthlyScoreServiceImpl implements MonthlyScoreService{
 		
 		return rankDTO;
 	}
-
 }

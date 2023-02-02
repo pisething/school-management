@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+    - file: db/changelog/001_init_db_structure.yaml
+  - include:
+    - file: db/changelog/003_insert_subject.yaml
+  - include:
+    - file: db/changelog/004_add_columns_date.yaml

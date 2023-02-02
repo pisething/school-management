@@ -18,6 +18,7 @@ import com.piseth.java.school.schoolManagement.model.Subject;
 
 import lombok.RequiredArgsConstructor;
 
+@SuppressWarnings("serial")
 @RequiredArgsConstructor
 public class MonthlyScoreSpec implements Specification<MonthlyScore>{
 	private final MonthlyScoreFilter filter;

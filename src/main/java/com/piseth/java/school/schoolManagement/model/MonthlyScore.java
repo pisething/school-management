@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "monthly_score", uniqueConstraints = @UniqueConstraint(
 		columnNames = {"student_id", "subject_id", "year", "month"}))
-public class MonthlyScore {
+public class MonthlyScore extends AuditEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

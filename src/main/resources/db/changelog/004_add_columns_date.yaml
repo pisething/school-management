@@ -1,0 +1,14 @@
+databaseChangeLog:
+- changeSet:
+    id: 004_add_columns_date
+    author: ponleunhoem@gmail.com
+    changes:
+      - addColumn:
+            tableName: monthly_score
+            columns:
+            - column:
+                name: date_create
+                type: DATETIME
+            - column:
+                name: date_update
+                type: DATETIME

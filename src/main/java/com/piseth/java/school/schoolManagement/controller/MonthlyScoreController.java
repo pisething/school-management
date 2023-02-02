@@ -2,8 +2,6 @@ package com.piseth.java.school.schoolManagement.controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.piseth.java.school.schoolManagement.dto.MonthlyScoreDTO;
 import com.piseth.java.school.schoolManagement.dto.RankDTO;
-import com.piseth.java.school.schoolManagement.dto.StudentDTO;
 import com.piseth.java.school.schoolManagement.mapper.MonthlyScoreMapper;
-import com.piseth.java.school.schoolManagement.mapper.StudentMapper;
 import com.piseth.java.school.schoolManagement.model.MonthlyScore;
-import com.piseth.java.school.schoolManagement.model.Student;
 import com.piseth.java.school.schoolManagement.service.MonthlyScoreService;
 
 import lombok.RequiredArgsConstructor;

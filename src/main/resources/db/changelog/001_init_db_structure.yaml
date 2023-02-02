@@ -1,0 +1,81 @@
+databaseChangeLog:
+- changeSet:
+    id: 001_init_db_structure
+    author: ponleunhoem@gmail.com
+    changes:
+     - createTable:
+        tableName: students
+        columns:
+        - column:
+            constraints:
+              primaryKey: true
+            name: id
+            type: BIGINT
+        - column:
+            name: grade
+            type: INTEGER
+        - column:
+            name: name
+            type: VARCHAR(255)
+        -column:
+            name: gender
+            type: STRING
+        -column:
+            name: className
+            type: VARCHAR(255)
+        -createTable:
+         tableName: subjects 
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: id
+            type: BIGINT
+        - column:
+            name: name
+            type: VARCHAR(255)
+        -createTable:
+           tableName: monthly_score 
+           columns:
+             -column:
+             autoIncrement: true
+             constraints: 
+                 primaryKey: true
+                 name: id
+                 type: BIGINT
+           -column: 
+                name: score
+                type: DOUBLE
+           -column:
+            name: year
+            type: SMALLINT
+            -column:
+            name: month
+            type: SMALLINT
+            -column:
+            name: student_id
+            type: BIGINT
+            constraints:
+               -foreignKeyName: fk_monthly_score_student
+               references: student(id)
+            -column:
+              name: subject_id
+              type: BIGINT
+              constraints:
+                 -foreignKeyName: fk_monthly_score_subjects
+                 reference: subects(id)
+                    
+              -addUniqueConstraint:
+        columnNames: student_id, subject_id, year, month
+        constraintName: ukb53j9mptndycba4fv2tb2h6xy
+        tableName: monthly_score     
+            
+            
+                
+             
+            
+            
+  
+            
+        
