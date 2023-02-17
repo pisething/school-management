@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.piseth.java.school.schoolManagement.model.Student;
+import com.piseth.java.school.schoolManagement.spec.StudentSpec;
 
 public interface StudentService {
 	Student register(Student student);
@@ -14,6 +15,6 @@ public interface StudentService {
 
 	void delete(Long id);
 
-	List<Student> getStudents(Map<String, String> params);
+	List<Student> getStudents(Map<String, String> params, StudentSpec spec);
 	
 }

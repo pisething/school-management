@@ -1,0 +1,66 @@
+databaseChangeLog:
+- changeSet:
+    id: 001_init_db_structure
+    author: tthyu83@gmail.com
+    changes:
+    - createTable:
+        tableName: subjects
+        columns:
+        - column:
+            constraints:
+              primaryKey: true
+            name: id
+            type: BIGINT
+        - column:
+            name: name
+            type: VARCHAR(255)
+    - createTable:
+        tableName: students
+        columns:
+        - column:
+            constraints:
+              primaryKey: true
+            name: id
+            type: BIGINT
+        - column:
+            name: name
+            type: VARCHAR(255)
+        - column: 
+            name: gender
+            type: VARCHAR(10)
+        - column: 
+            name: grade
+            type: BIGINT
+        - column: 
+            name: class_name
+            type: VARCHAR(10)
+    - createTable:
+        tableName: monthly_score
+        columns:
+        - column:
+            constraints:
+              primaryKey: true
+            name: id
+            type: BIGINT
+        - column:
+            name: student_id
+            type: BIGINT
+            constraints:
+              foreignKeyName: fk_monthly_score_student
+              references: students(id)
+        - column: 
+            name: subject_id
+            type: BIGINT
+            constraints:
+              foreignKeyName: fk_monthly_score_subjects
+              references: subjects(id)
+        - column: 
+            name: score
+            type: BIGINT
+        - column: 
+            name: year
+            type: BIGINT
+        - column: 
+            name: month
+            type: BIGINT
+        

@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+    - file: db/changelog/001_init_db_structure.yml
+#  - include:
+#    - file: db/changelog/002_init_data_db.yml
+  - include: 
+    - file: db/changelog/003_add_column_date_auditing.yml
+  - include: 
+    - file: db/changelog/004_add_auto_increment_id.yml

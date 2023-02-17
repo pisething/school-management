@@ -1,16 +1,20 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/school_mgt
-    username: piseth
-    password: piseth123
+    url: jdbc:postgresql://localhost:5432/school-management
+    username: Kimhak
+    password: Kimhak
   jpa:
     hibernate:
       ddl-auto: update
     properties:
         hibernate:
           dialect: org.hibernate.dialect.PostgreSQLDialect
-    defer-datasource-initialization: true
-  sql:
-    init:
-      data-locations:      - classpath:data.sql
-      mode: always
+#    defer-datasource-initialization: true
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yml
+#  sql:
+#    init:
+#      data-locations:#      - classpath:data.sql
+#      mode: always
+server:
+    port: 8081

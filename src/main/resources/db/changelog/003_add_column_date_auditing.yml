@@ -1,0 +1,14 @@
+databaseChangeLog:
+- changeSet:
+    id: 003_add_column_date_auditing
+    author: tthyu83@gmail.com
+    changes:
+    - addColumn:
+        tableName: students
+        columns:
+        - column:
+            name: date_updated
+            type: DATETIME
+        - column:
+            name: date_created
+            type: DATETIME

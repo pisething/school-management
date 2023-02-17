@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002_init_data_db
+      author: kimhakSeang@gmail.com
+      changes:
+        - loadData:
+            file: db/data/subject.csv
+            tableName: subjects
+        - loadData:
+            file: db/data/student.csv
+            tableName: students
+        - loadData: 
+            file: db/data/monthlyScore.csv
+            tableName: monthly_score     
