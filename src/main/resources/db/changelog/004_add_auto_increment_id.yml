@@ -1,0 +1,14 @@
+databaseChangeLog:
+- changeSet:
+    id: 004_add_auto_increment_id
+    author: kimhakSeang@gmail.com
+    changes:
+    - addAutoIncrement:
+        columnDataType: BIGINT
+        columnName: id
+        defaultOnNull: false
+        generationType: ALWAYS
+        incrementBy: 1
+        schemaName: public
+        startWith: 100
+        tableName: students

@@ -9,10 +9,12 @@ spring:
     properties:
         hibernate:
           dialect: org.hibernate.dialect.PostgreSQLDialect
-    defer-datasource-initialization: true
-  sql:
-    init:
-      data-locations:      - classpath:data.sql
-      mode: always
+#    defer-datasource-initialization: true
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yml
+#  sql:
+#    init:
+#      data-locations:#      - classpath:data.sql
+#      mode: always
 server:
     port: 8081

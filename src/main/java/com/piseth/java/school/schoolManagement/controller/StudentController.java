@@ -35,12 +35,12 @@ public class StudentController {
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(StudentMapper.INSTANCE.toDTO(student));
 	}
-
+	
 	@GetMapping("{id}")
 	public ResponseEntity<?> getById(@PathVariable("id") Long id) {
 		Student student = studentService.getById(id);
 		return ResponseEntity.ok(StudentMapper.INSTANCE.toDTO(student));
-	}
+	} 
 	
 	@PutMapping("{id}")
 	public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody StudentDTO studentDTO) {
@@ -48,6 +48,7 @@ public class StudentController {
 		student = studentService.update(id, student);
 		return ResponseEntity.ok(StudentMapper.INSTANCE.toDTO(student));
 	}
+
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
@@ -57,7 +58,7 @@ public class StudentController {
 	
 	@GetMapping
 	public ResponseEntity<?> getStudentList(@RequestParam Map<String, String> params) {
-		List<StudentDTO> list = studentService.getStudents(params)
+		List<StudentDTO> list = studentService.getStudents(params,null)
 			.stream()
 			.map(st -> StudentMapper.INSTANCE.toDTO(st))
 			.toList();

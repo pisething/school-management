@@ -31,7 +31,7 @@ public class SubjectController {
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(SubjectMapper.INSTANCE.toDTO(subject));
 	}
-
+	
 	@GetMapping("{id}")
 	public ResponseEntity<?> getById(@PathVariable("id") Long id) {
 		Subject subject = subjectService.getById(id);

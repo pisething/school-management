@@ -38,15 +38,16 @@ public class StudentServiceImpl implements StudentService {
 		BeanUtils.copyProperties(student, studentTarget, "id");
 		return studentRepository.save(studentTarget);
 	}
-
+ 
 	@Override
 	public void delete(Long id) {
 		Student studentTarget = getById(id);
 		studentRepository.delete(studentTarget);
 	}
 
+	
 	@Override
-	public List<Student> getStudents(Map<String, String> params) {
+	public List<Student> getStudents(Map<String, String> params,StudentSpec spec) {
 		StudentFilter studentFilter = new StudentFilter();
 
 		if (params.containsKey(StudentPropertyFilter.ID)) {
@@ -62,7 +63,8 @@ public class StudentServiceImpl implements StudentService {
 				studentFilter.setGender(gender);
 			}
 		}
-		StudentSpec studentSpec = new StudentSpec(studentFilter);
+		
+		StudentSpec studentSpec = spec!=null ? spec: new StudentSpec(studentFilter);
 		return studentRepository.findAll(studentSpec);
 	}
 

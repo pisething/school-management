@@ -1,22 +1,22 @@
 package com.piseth.java.school.schoolManagement.service.impl;
 
-import java.util.Collections;
+import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.CLASS_NAME;
+import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.GRADE;
+import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.MONTH;
+import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.STUDENTID;
+import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.YEAR;
+
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.NumberUtils;
 
-import com.piseth.java.school.schoolManagement.dto.MonthlyScoreDTO;
 import com.piseth.java.school.schoolManagement.dto.RankDTO;
 import com.piseth.java.school.schoolManagement.exception.BadRequestException;
-import com.piseth.java.school.schoolManagement.mapper.MonthlyScoreMapper;
 import com.piseth.java.school.schoolManagement.model.MonthlyScore;
 import com.piseth.java.school.schoolManagement.model.Student;
 import com.piseth.java.school.schoolManagement.repository.MonthlyScoreRepository;
@@ -24,8 +24,6 @@ import com.piseth.java.school.schoolManagement.repository.StudentRepository;
 import com.piseth.java.school.schoolManagement.service.MonthlyScoreService;
 import com.piseth.java.school.schoolManagement.spec.MonthlyScoreFilter;
 import com.piseth.java.school.schoolManagement.spec.MonthlyScoreSpec;
-
-import static com.piseth.java.school.schoolManagement.property.MonthlyScorePropertyFilter.*;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,7 +39,7 @@ public class MonthlyScoreServiceImpl implements MonthlyScoreService{
 	}
 
 	@Override
-	public List<MonthlyScore> getMonthlyScore(Map<String, String> params) {
+	public List<MonthlyScore> getMonthlyScore(Map<String, String> params,MonthlyScoreSpec monthlyScoreSpec) {
 		
 		MonthlyScoreFilter filter = new MonthlyScoreFilter();
 		if(params.containsKey(GRADE)) {
@@ -56,15 +54,14 @@ public class MonthlyScoreServiceImpl implements MonthlyScoreService{
 		if(params.containsKey(MONTH)) {
 			filter.setMonth(NumberUtils.parseNumber(params.get(MONTH), Short.class));
 		}
-		MonthlyScoreSpec spec = new MonthlyScoreSpec(filter);
-		
+		MonthlyScoreSpec spec = monthlyScoreSpec != null ? monthlyScoreSpec: new MonthlyScoreSpec(filter);
 		return monthlyScoreRepository.findAll(spec);
 	}
-
+	
 	@Override
-	public List<RankDTO> getRankDTO(Map<String, String> params) {
+	public List<RankDTO> getRankDTO(Map<String, String> params,MonthlyScoreSpec spec) {
 			
-			Map<Student, List<MonthlyScore>> mapMonthlyScore = getMonthlyScore(params)
+			Map<Student, List<MonthlyScore>> mapMonthlyScore = getMonthlyScore(params,null)
 				.stream()
 				.collect(Collectors.groupingBy(MonthlyScore::getStudent));
 			
@@ -95,8 +92,6 @@ public class MonthlyScoreServiceImpl implements MonthlyScoreService{
 					return rank;
 				})
 				.toList();
-			
-			
 		return ranklist;
 	}
 	
@@ -113,12 +108,11 @@ public class MonthlyScoreServiceImpl implements MonthlyScoreService{
 		rankDTO.setStudentId(student.getId());
 		rankDTO.setTotalScore(totalScore);
 		rankDTO.setAverageScore(average);
-		
 		return rankDTO;
 	}
 	
 	@Override
-	public Map<String, Double> listScores(Map<String, String> params) {
+	public Map<String, Double> listScores(Map<String, String> params,MonthlyScoreSpec spec) {
 		MonthlyScoreFilter monthlyScoreFilter = new MonthlyScoreFilter();
 
 		if (params.containsKey(STUDENTID)) {
@@ -133,19 +127,18 @@ public class MonthlyScoreServiceImpl implements MonthlyScoreService{
 			validationFieldBlank(params,MONTH);
 			monthlyScoreFilter.setMonth(Short.parseShort(params.get(MONTH)));
 		}
-
-		MonthlyScoreSpec monthlyScoreSpec = new MonthlyScoreSpec(monthlyScoreFilter);
+		MonthlyScoreSpec monthlyScoreSpec = spec != null ? spec: new MonthlyScoreSpec(monthlyScoreFilter);
 		return toMapScores(monthlyScoreRepository.findAll(monthlyScoreSpec));
 	}
 	// Validate Blank Field
     private void validationFieldBlank( Map<String, String> params, String field) {
 		if(params.get(field).isBlank()) {
-			throw new BadRequestException(field.toUpperCase());
+			throw new BadRequestException(field);
 		}
     }
-    // Convert List to Map 
+    // Convert List to Map
 	private Map<String, Double> toMapScores(List<MonthlyScore> monthlyScores) {
 		return monthlyScores.stream().collect(Collectors.toMap(l->l.getSubject().getName(), MonthlyScore::getScore));
-	}
+	} 
 
 }

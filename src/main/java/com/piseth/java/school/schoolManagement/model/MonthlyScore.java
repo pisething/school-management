@@ -1,5 +1,6 @@
 package com.piseth.java.school.schoolManagement.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class MonthlyScore {
 	@JoinColumn(name = "student_id")
 	private Student student;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "subject_id")
 	private Subject subject;
 	
